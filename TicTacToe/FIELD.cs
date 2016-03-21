@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace TicTacToe
 {
-    public enum SIGN
+    public enum FIELD
     {
-        SGN_O='O',
-        SGN_X='X'
+        FLD_EMPTY = ' ',
+        FLD_X ='X',
+        FLD_O ='O'
     }
 }
+

@@ -28,31 +28,25 @@ namespace TicTacToe
                 gameBoard.putMark(currentPlayer, playerX.takeTurn());
                 gameBoard.clearBoard();
                 moveCounter++;
-                if(gameBoard.checkWin())
+                if(currentPlayer.checkWin(gameBoard))
                 {
-                    Console.Write("Gracz: {0} wygrał!", currentPlayer.getSign());
+                    Console.WriteLine("Gracz: {0} wygrał!", currentPlayer.getSign());
                     gameBoard.printBoard();
                     play = false;
                 }
                 else if (checkDraw(moveCounter))
                 {
-                    Console.Write("REMIS");
+                    Console.WriteLine("REMIS");
                     gameBoard.printBoard();
                     play = false;
                 }
                 currentPlayer = changeCurrentPlayer(currentPlayer, playerX, playerO);
-
-
-
             }
         }
         private Player changeCurrentPlayer(Player currentPlayer, Player playerX,Player playerO)
         {
-            if (currentPlayer == playerX)
-                currentPlayer = playerO;
-            else
-                currentPlayer = playerX;
-            return currentPlayer;
+            return currentPlayer==playerX? playerO:playerX;
+         
         }
 
         private bool checkDraw(int turnCounter)
