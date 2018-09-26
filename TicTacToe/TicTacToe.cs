@@ -24,23 +24,32 @@ namespace TicTacToe
             while (play)
             {
                 gameBoard.printBoard();
-                Console.WriteLine("Graczu: {0} Podaj pole, w ktorym chcesz umiescic znak: ", currentPlayer.getSign());
-                gameBoard.putMark(currentPlayer, playerX.takeTurn());
-                gameBoard.clearBoard();
-                moveCounter++;
-                if(currentPlayer.checkWin(gameBoard))
+                Console.WriteLine("Player: {0} Enter the field in which you want to put the character: ", currentPlayer.getSign());
+                try
                 {
-                    Console.WriteLine("Gracz: {0} wygrał!", currentPlayer.getSign());
-                    gameBoard.printBoard();
-                    play = false;
+                    gameBoard.putMark(currentPlayer, playerX.takeTurn());
+                    gameBoard.clearBoard();
+                    moveCounter++;
+                    if (currentPlayer.checkWin(gameBoard))
+                    {
+                        Console.WriteLine("Player: {0} won!", currentPlayer.getSign());
+                        gameBoard.printBoard();
+                        play = false;
+                    }
+                    else if (checkDraw(moveCounter))
+                    {
+                        Console.WriteLine("DRAW");
+                        gameBoard.printBoard();
+                        play = false;
+                    }
+                    currentPlayer = changeCurrentPlayer(currentPlayer, playerX, playerO);
                 }
-                else if (checkDraw(moveCounter))
+                catch (Exception)
                 {
-                    Console.WriteLine("REMIS");
-                    gameBoard.printBoard();
-                    play = false;
+                    Console.WriteLine("Invalid Input. Please enter number between 1-9!");
+                    Console.ReadLine();
+                    Console.Clear();
                 }
-                currentPlayer = changeCurrentPlayer(currentPlayer, playerX, playerO);
             }
         }
         private Player changeCurrentPlayer(Player currentPlayer, Player playerX,Player playerO)
